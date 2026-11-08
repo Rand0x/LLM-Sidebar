@@ -1,0 +1,21 @@
+{
+  "minimum_chrome_version": "116",
+  "background": {
+    "service_worker": "background/background.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "permissions": [
+    "sidePanel"
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+L"
+      },
+      "description": "__MSG_manifest_cmdOpenSidebar__"
+    }
+  }
+}

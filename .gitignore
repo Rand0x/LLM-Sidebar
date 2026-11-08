@@ -1,0 +1,15 @@
+# Build output
+dist/
+web-ext-artifacts/
+node_modules/
+
+# Internal working notes (contain local paths, not meant for the public repository)
+docs/review/
+docs/api-phase-*.md
+
+# Local tooling
+.claude/
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini

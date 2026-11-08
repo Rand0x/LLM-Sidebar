@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title data-i18n="options.page.title">LLM Sidebar – Einstellungen</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../icons/icon-32.png">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="options.css">
+  <script type="module" src="options.js"></script>
+</head>
+<body>
+  <button type="button" class="skip-link btn btn-primary" id="skip-link" data-i18n="options.page.skipLink">Zum Inhalt springen</button>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="brand-logo" src="../icons/icon-48.png" alt="" width="32" height="32">
+        <div class="brand-text">
+          <div class="brand-name">LLM Sidebar</div>
+          <div class="brand-sub" data-i18n="options.page.subtitle">Einstellungen</div>
+        </div>
+      </div>
+      <nav class="nav" id="nav" aria-label="Bereiche der Einstellungen" data-i18n-aria-label="options.page.navLabel"></nav>
+      <div class="save-status" id="save-status" role="status" aria-live="polite" data-i18n="options.save.auto">Änderungen werden automatisch gespeichert.</div>
+    </aside>
+    <main class="main" id="main">
+      <div class="main-inner">
+        <section class="access-banner-slot" id="access-banner" hidden></section>
+        <div id="sections">
+          <div class="page-loading" role="status">
+            <span class="spinner spinner-lg" aria-hidden="true"></span>
+            <span data-i18n="options.page.loading">Einstellungen werden geladen …</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="sr-only" id="live-region" aria-live="polite" aria-atomic="true"></div>
+  <noscript>
+    <p class="noscript">Für die Einstellungen wird JavaScript benötigt.</p>
+  </noscript>
+</body>
+</html>

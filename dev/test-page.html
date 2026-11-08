@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Quiet Science of Sourdough – Crumb &amp; Crust</title>
+  <meta name="description" content="Why wild yeast and lactic acid bacteria make better bread: a practical guide to sourdough fermentation, hydration and timing.">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --page-bg: #fbf8f3;
+      --page-text: #2b2620;
+      --page-muted: #6f665c;
+      --page-accent: #a4551f;
+      --page-border: #e3dacd;
+      --page-soft: #f2ebe0;
+      --page-code: #f0ebe4;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #1c1a17;
+        --page-text: #ece6dd;
+        --page-muted: #a89f93;
+        --page-accent: #e39a5f;
+        --page-border: #3a352f;
+        --page-soft: #26231f;
+        --page-code: #2a2622;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--page-text);
+      font: 17px/1.65 Georgia, 'Times New Roman', serif;
+    }
+    a { color: var(--page-accent); }
+    .site-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--page-border);
+      font-family: system-ui, sans-serif;
+      font-size: 15px;
+    }
+    .logo { font-weight: 700; font-size: 19px; text-decoration: none; color: var(--page-text); }
+    .site-header nav { display: flex; gap: 16px; }
+    .site-header nav a { text-decoration: none; color: var(--page-muted); }
+    .site-header input[type="search"] {
+      margin-left: auto;
+      padding: 6px 10px;
+      border: 1px solid var(--page-border);
+      border-radius: 6px;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; }
+    h1 { font-size: 40px; line-height: 1.15; margin: 16px 0 8px; }
+    h2 { font-size: 26px; margin: 40px 0 8px; }
+    .byline { color: var(--page-muted); font-family: system-ui, sans-serif; font-size: 14px; margin-top: 0; }
+    figure { margin: 24px 0; }
+    figure img { width: 100%; height: auto; border-radius: 10px; display: block; }
+    figcaption { color: var(--page-muted); font-size: 14px; margin-top: 6px; font-style: italic; }
+    table { width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 15px; margin: 16px 0; }
+    caption { text-align: left; color: var(--page-muted); padding-bottom: 6px; }
+    th, td { border: 1px solid var(--page-border); padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: var(--page-soft); }
+    blockquote {
+      margin: 24px 0;
+      padding: 12px 20px;
+      border-left: 4px solid var(--page-accent);
+      background: var(--page-soft);
+      font-style: italic;
+    }
+    blockquote footer { font-style: normal; color: var(--page-muted); font-size: 15px; margin-top: 6px; }
+    code, kbd, pre { font-family: Consolas, 'Courier New', monospace; font-size: 14px; }
+    code { background: var(--page-code); padding: 1px 4px; border-radius: 4px; }
+    kbd { border: 1px solid var(--page-border); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; }
+    pre { background: var(--page-code); padding: 14px 16px; border-radius: 8px; overflow-x: auto; line-height: 1.45; }
+    pre code { background: none; padding: 0; }
+    .form-section, .comments-section { border-top: 1px solid var(--page-border); margin-top: 48px; }
+    .form-section label { display: block; font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; margin: 18px 0 6px; }
+    .form-section textarea,
+    .form-section input[type="text"],
+    .editable {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--page-border);
+      border-radius: 8px;
+      background: var(--page-bg);
+      color: inherit;
+      font: 16px/1.5 system-ui, sans-serif;
+    }
+    .editable { min-height: 90px; }
+    .dev-note {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      border: 1px dashed var(--page-accent);
+      border-radius: 8px;
+      background: var(--page-soft);
+    }
+    .comment { border-bottom: 1px solid var(--page-border); padding: 6px 0; }
+    .comment-meta { font-family: system-ui, sans-serif; font-size: 13px; color: var(--page-muted); margin: 0; }
+    .comment p:last-child { margin-top: 4px; }
+    .load-more {
+      margin-top: 16px;
+      padding: 8px 16px;
+      border: 1px solid var(--page-accent);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--page-accent);
+      font: 600 15px system-ui, sans-serif;
+      cursor: pointer;
+    }
+    .load-more:focus-visible { outline: 3px solid var(--page-accent); outline-offset: 2px; }
+    .site-footer { text-align: center; color: var(--page-muted); font: 13px system-ui, sans-serif; padding: 24px; border-top: 1px solid var(--page-border); }
+  </style>
+</head>
+<body data-dev-page="test-page">
+  <header class="site-header">
+    <a class="logo" href="#top" translate="no">Crumb &amp; Crust</a>
+    <nav aria-label="Main">
+      <a href="#starter">Starters</a>
+      <a href="#hydration">Hydration</a>
+      <a href="#math">Baker's math</a>
+      <a href="#formular">Formular</a>
+    </nav>
+    <input type="search" placeholder="Search recipes and techniques…" title="Search the whole site" aria-label="Search">
+  </header>
+
+  <main id="top">
+    <article>
+      <h1>The Quiet Science of Sourdough</h1>
+      <p class="byline">By Mara Lindqvist · Published March 14, 2026 · 8 min read</p>
+
+      <figure>
+        <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 300'%3E%3Crect width='640' height='300' fill='%23f1e4cf'/%3E%3Cellipse cx='320' cy='190' rx='230' ry='92' fill='%23a8652f'/%3E%3Cellipse cx='320' cy='176' rx='208' ry='74' fill='%23c9884a'/%3E%3Cpath d='M180 168 Q320 112 460 168' stroke='%23f4dcae' stroke-width='12' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
+          alt="A round sourdough loaf with a deep golden crust and a single curved score across the top"
+          title="Country loaf, 75 percent hydration, baked in a cast-iron pot" width="640" height="300">
+        <figcaption>A country loaf after a fourteen-hour cold proof in the fridge.</figcaption>
+      </figure>
+
+      <p>Every sourdough loaf begins with something you cannot see: a living culture of wild yeast and
+        bacteria that has been fed nothing but flour and water. Commercial yeast is a single, fast and
+        predictable strain. A starter is a small ecosystem, and like every ecosystem it rewards patience
+        more than precision.</p>
+      <p>The good news is that you do not need a laboratory to bake great bread. You need to understand
+        three things – what lives in your jar, how water changes your dough, and why time is your most
+        important ingredient.</p>
+
+      <h2 id="starter">What actually lives in a starter</h2>
+      <p>A mature starter is dominated by lactic acid bacteria, which outnumber the yeast by roughly a
+        hundred to one. The bacteria produce lactic and acetic acid, which give the bread its tang and
+        help it stay fresh for days. The yeast produce carbon dioxide, which is what makes the dough rise.</p>
+      <p>The two groups cooperate surprisingly well. The acids keep unwanted microbes away, while the
+        yeast tolerate the sour environment that would stop most other organisms. When people say their
+        starter "smells like nail polish", they are usually noticing ethyl acetate – a harmless sign that
+        the culture is hungry and needs to be fed.</p>
+
+      <h2>Five habits of reliable bakers</h2>
+      <ul>
+        <li>Feed the starter at the same time every day and use it when it has roughly doubled.</li>
+        <li>Weigh everything, including the water – cups and spoons are far too imprecise.</li>
+        <li>Keep notes on room temperature, because a few degrees can change the timing by hours.</li>
+        <li>Watch the dough instead of the clock: look for a domed surface and visible bubbles.</li>
+        <li>Let the bread cool for at least an hour before slicing, or the crumb will turn gummy.</li>
+      </ul>
+
+      <h2 id="hydration">Hydration at a glance</h2>
+      <table>
+        <caption>How the amount of water changes the dough</caption>
+        <thead>
+          <tr><th scope="col">Hydration</th><th scope="col">Dough feel</th><th scope="col">Typical crumb</th><th scope="col">Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>60–65 %</td><td>Firm and easy to shape</td><td>Tight and even</td><td>Sandwich loaves, bagels</td></tr>
+          <tr><td>68–72 %</td><td>Soft but manageable</td><td>Moderately open</td><td>Everyday country bread</td></tr>
+          <tr><td>75–80 %</td><td>Sticky and extensible</td><td>Open with glossy holes</td><td>Rustic boules and batards</td></tr>
+          <tr><td>85 % and more</td><td>Almost pourable</td><td>Very open and irregular</td><td>Ciabatta, focaccia</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Timing is a variable, not a rule</h2>
+      <p>Most recipes give you times, but those times only hold at the temperature the author happened
+        to have in their kitchen. At 24 °C a bulk fermentation might take five hours; at 19 °C the same
+        dough can need eight. A cold proof in the refrigerator slows everything down even further, which
+        is exactly why so many bakers shape in the evening and bake the next morning.</p>
+      <blockquote>
+        <p>"Recipes tell you what happened in someone else's kitchen. Your dough tells you what is
+          happening in yours – learn to listen to it."</p>
+        <footer>– Jonas Okafor, head baker at a small neighbourhood bakery</footer>
+      </blockquote>
+
+      <h2>A simple weekend schedule</h2>
+      <ol>
+        <li>Friday, 9 pm: feed the starter and leave it on the counter overnight.</li>
+        <li>Saturday, 9 am: mix flour and water and let the mixture rest for an hour.</li>
+        <li>Saturday, 10 am: add starter and salt, then stretch and fold every 30 minutes.</li>
+        <li>Saturday, 3 pm: shape the loaf and move it into the refrigerator.</li>
+        <li>Sunday, 8 am: bake straight from the fridge in a preheated pot.</li>
+      </ol>
+
+      <h2 id="math">Doing the math</h2>
+      <p>Bakers express every ingredient as a percentage of the total flour weight, the so-called
+        <em>baker's percentages</em>. If you want to scale a recipe, change <code>flour_g</code> and keep
+        the ratios. Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy the snippet below into your own notes:</p>
+      <pre><code>def bakers_percentages(flour_g, water_g, starter_g, salt_g):
+    """Return each ingredient as a percentage of the flour weight."""
+    return {
+        "water": round(water_g / flour_g * 100, 1),
+        "starter": round(starter_g / flour_g * 100, 1),
+        "salt": round(salt_g / flour_g * 100, 1),
+    }
+
+print(bakers_percentages(500, 375, 100, 10))
+# {'water': 75.0, 'starter': 20.0, 'salt': 2.0}</code></pre>
+      <p>If you want to dig deeper into the history and the microbiology, the
+        <a href="https://en.wikipedia.org/wiki/Sourdough" target="_blank" rel="noopener noreferrer" title="Opens in a new tab">Wikipedia article on sourdough</a>
+        is a good starting point. Whatever you read, remember that the best teacher is a loaf you bake
+        this weekend and the notes you take while doing it.</p>
+    </article>
+
+    <section class="form-section" id="formular" aria-labelledby="formular-title">
+      <h2 id="formular-title">Formular</h2>
+      <p>Send us your own baking story. The fields below are prefilled with a draft that still needs
+        some proofreading.</p>
+      <div class="dev-note notranslate" lang="de">
+        <strong>Hinweis für Entwickler:</strong> Markiere Text in den Feldern unten und probiere die
+        Schnellaktionen (z.&nbsp;B. „Korrigieren“) samt „Ersetzen“ aus. Dieser Kasten hat die Klasse
+        <code>notranslate</code> und darf bei der Seitenübersetzung nicht verändert werden.
+      </div>
+
+      <label for="story-text">Your story (textarea)</label>
+      <textarea id="story-text" name="story" rows="7" placeholder="Tell us about your first loaf…">Hi Mara,
+
+thank you for you're article, it was realy helpfull. I has been baking for two years now but my bread were always to dense. After reading you're tips about hydration i tryed 75 % and the crumb is finaly open. Their is just one problem: the dough sticks to every thing. Do you have any advise?
+
+Best wishes,
+Tom</textarea>
+
+      <label for="story-subject">Betreff (text input, German)</label>
+      <input type="text" id="story-subject" name="subject" placeholder="Betreff deiner Nachricht"
+        value="Ich freu mich schon auf unser trefen am Wochende, das wird bestimt super lecker.">
+
+      <label id="notes-label">Notes (contenteditable)</label>
+      <div class="editable" id="story-notes" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="notes-label">Their are many reasons why peoples love baking bread at home. Its cheap, its relaxing and the smell off fresh bread is increadible. Me and my sister bakes a new loaf every sunday morning.</div>
+    </section>
+
+    <section class="comments-section" id="comments-section" aria-labelledby="comments-title">
+      <h2 id="comments-title">Reader comments</h2>
+      <div id="comments">
+        <div class="comment">
+          <p class="comment-meta">Priya · 2 days ago</p>
+          <p>I moved my starter to a warmer spot on top of the fridge and it finally started doubling within six hours.</p>
+        </div>
+        <div class="comment">
+          <p class="comment-meta">Lukas · 1 day ago</p>
+          <p>The table about hydration is exactly what I needed. I always wondered why my focaccia never looked like the photos.</p>
+        </div>
+      </div>
+      <button type="button" class="load-more" id="load-more" title="Appends another comment (tests translation of new content)">Load another comment</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">© 2026 Crumb &amp; Crust – a fictional baking blog used as a test page for LLM Sidebar.</footer>
+
+  <script src="/dev/harness.js"></script>
+  <script src="/src/content/content.js"></script>
+</body>
+</html>

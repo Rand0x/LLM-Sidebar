@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Sidebar – Dev-Harness</title>
+  <link rel="stylesheet" href="/dev/harness.css">
+</head>
+<body data-dev-page="harness">
+  <!-- Background context first, so background.js starts as early as possible. -->
+  <iframe id="bg-frame" class="bg-frame" src="/dev/bg.html" title="Hintergrund (background.js)" tabindex="-1" aria-hidden="true"></iframe>
+
+  <header class="topbar">
+    <h1 class="topbar-title">LLM Sidebar – Dev-Harness</h1>
+    <div class="toolbar" role="toolbar" aria-label="Harness-Aktionen">
+      <button type="button" class="hbtn" id="btn-reload-page" title="Lädt die Test-Seite (Tab 1) neu">Test-Seite neu laden</button>
+      <button type="button" class="hbtn" id="btn-page-tab"
+        title="Öffnet die Test-Seite in einem eigenen Browser-Tab. Dort ist sie der oberste Frame (wie ein echter Tab), z. B. für die Seitenübersetzung; solange er offen ist, gehen tabs.sendMessage und executeScript dorthin.">Test-Seite als Tab</button>
+      <button type="button" class="hbtn" id="btn-reload-panel" title="Lädt die Seitenleiste neu">Seitenleiste neu laden</button>
+      <button type="button" class="hbtn" id="btn-options" title="Öffnet die Optionen in einem neuen Tab">Optionen öffnen</button>
+      <div class="menu-wrap">
+        <button type="button" class="hbtn" id="btn-ctx" aria-haspopup="menu" aria-expanded="false" aria-controls="ctx-menu"
+          title="Löst contextMenus.onClicked im Hintergrund aus – mit der aktuellen Auswahl der Test-Seite">Kontextmenü simulieren ▾</button>
+        <div class="hmenu" id="ctx-menu" role="menu" aria-label="Kontextmenü-Einträge des Hintergrunds" hidden></div>
+      </div>
+      <button type="button" class="hbtn" id="btn-cmd-translate" title="Löst commands.onCommand('translate-page') aus (wie Alt+Shift+T)">Shortcut: Seite übersetzen</button>
+      <button type="button" class="hbtn hbtn-danger" id="btn-reset" title="Löscht storage.local und storage.session des Shims und lädt die Harness neu">Storage zurücksetzen</button>
+    </div>
+    <div class="topbar-right">
+      <span class="action-icon" id="action-icon" role="img" aria-label="Erweiterungssymbol: LLM Sidebar öffnen" title="LLM Sidebar öffnen">
+        <img src="/src/icons/icon-16.png" alt="" width="16" height="16">
+        <span class="action-badge" id="action-badge" hidden></span>
+      </span>
+      <label class="hcheck" title="Protokolliert jeden API-Aufruf mit dem Präfix [shim] in der Konsole">
+        <input type="checkbox" id="chk-debug"> Shim-Log
+      </label>
+      <div class="status" id="status" aria-live="polite">
+        <span class="status-item" id="status-bg"><span class="dot" aria-hidden="true"></span>Hintergrund</span>
+        <span class="status-item" id="status-page"><span class="dot" aria-hidden="true"></span>Test-Seite</span>
+        <span class="status-item" id="status-panel"><span class="dot" aria-hidden="true"></span>Seitenleiste</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="split" id="split">
+    <iframe id="page-frame" class="page-frame" src="/dev/test-page.html" title="Test-Seite (Tab 1)"></iframe>
+    <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" aria-controls="panel-frame"
+      aria-label="Breite der Seitenleiste ändern" tabindex="0"
+      title="Ziehen oder Pfeiltasten: Breite ändern · Doppelklick: Standardbreite"></div>
+    <iframe id="panel-frame" class="panel-frame" src="/src/sidepanel/sidepanel.html" title="Seitenleiste"></iframe>
+  </main>
+
+  <div class="notices" id="notices" aria-live="polite"></div>
+
+  <script src="/dev/harness.js"></script>
+</body>
+</html>

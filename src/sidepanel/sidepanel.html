@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>LLM Sidebar</title>
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="sidepanel.css">
+  <script type="module" src="sidepanel.js"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="main" id="main">
+      <header class="sp-header">
+        <button type="button" class="btn-icon" id="btn-history" data-icon="history" title="Verlauf" aria-label="Verlauf öffnen" data-i18n-title="sidepanel.header.history" data-i18n-aria-label="sidepanel.header.historyOpen" aria-controls="history" aria-expanded="false"></button>
+        <button type="button" class="sp-title" id="chat-title" title="Chat umbenennen" data-i18n-title="sidepanel.header.rename">
+          <span class="sp-title-text truncate" id="chat-title-text" data-i18n="sidepanel.chat.defaultTitle">Neuer Chat</span>
+          <span class="sp-title-edit" data-icon="edit" data-icon-size="13" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="btn-icon" id="btn-new" data-icon="plus" title="Neuer Chat (Strg+Umschalt+O)" aria-label="Neuer Chat" data-i18n-title="sidepanel.header.newChatHint" data-i18n-aria-label="sidepanel.header.newChat" aria-keyshortcuts="Control+Shift+O"></button>
+        <button type="button" class="btn-icon" id="btn-tools" data-icon="more" title="Werkzeuge" aria-label="Werkzeuge" data-i18n-title="sidepanel.header.tools" data-i18n-aria-label="sidepanel.header.tools" aria-haspopup="menu" aria-expanded="false"></button>
+        <button type="button" class="btn-icon" id="btn-settings" data-icon="settings" title="Einstellungen" aria-label="Einstellungen öffnen" data-i18n-title="sidepanel.header.settings" data-i18n-aria-label="sidepanel.header.settingsOpen"></button>
+      </header>
+
+      <div class="sp-subheader" role="toolbar" aria-label="Modell, Persona und Seitenkontext" data-i18n-aria-label="sidepanel.header.subheader">
+        <button type="button" class="picker-btn model-btn" id="model-btn" aria-haspopup="dialog" aria-expanded="false">
+          <span class="picker-dot" id="model-dot" aria-hidden="true"></span>
+          <span class="picker-btn-text truncate" id="model-label" data-i18n="sidepanel.model.choose">Modell wählen</span>
+          <span class="picker-chevron" data-icon="chevron-down" data-icon-size="14" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="picker-btn persona-btn" id="persona-btn" aria-haspopup="dialog" aria-expanded="false">
+          <span data-icon="user" data-icon-size="14" aria-hidden="true"></span>
+          <span class="picker-btn-text truncate" id="persona-label" data-i18n="sidepanel.persona.default">Standard</span>
+          <span class="picker-chevron" data-icon="chevron-down" data-icon-size="14" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="chip page-chip" id="page-chip" aria-pressed="false">
+          <span data-icon="page" data-icon-size="14" aria-hidden="true"></span>
+          <span class="page-chip-text" id="page-chip-text" data-i18n="sidepanel.page.chip">Seite</span>
+        </button>
+      </div>
+
+      <div class="banner" id="perm-banner" role="region" aria-label="Fehlende Berechtigung" data-i18n-aria-label="sidepanel.permissions.region" hidden>
+        <span class="banner-icon" data-icon="shield" data-icon-size="18" aria-hidden="true"></span>
+        <div class="banner-body">
+          <strong data-i18n="sidepanel.permissions.title">Die Erweiterung braucht Zugriff auf Webseiten und KI-Anbieter</strong>
+          <span data-i18n="sidepanel.permissions.text">Ohne diese Berechtigung kann LLM Sidebar weder Seiteninhalte lesen noch deine KI-Anbieter erreichen.</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-primary" id="perm-grant" data-i18n="sidepanel.permissions.grant">Zugriff erlauben</button>
+      </div>
+
+      <div class="stage">
+        <main class="scroller" id="scroller" tabindex="-1">
+          <section class="welcome" id="welcome" aria-label="Willkommen" data-i18n-aria-label="sidepanel.welcome.region" hidden></section>
+          <div class="messages" id="messages" role="log" aria-label="Nachrichten" data-i18n-aria-label="sidepanel.messages.label" aria-live="polite"></div>
+        </main>
+        <button type="button" class="scroll-bottom" id="scroll-bottom" hidden title="Zum Ende springen" data-i18n-title="sidepanel.messages.scrollBottom">
+          <span data-icon="arrow-down" data-icon-size="14" aria-hidden="true"></span>
+          <span data-i18n="sidepanel.messages.scrollBottomShort">nach unten</span>
+        </button>
+      </div>
+
+      <footer class="composer" id="composer">
+        <div class="video-bar" id="video-bar" role="region" aria-label="YouTube-Video" data-i18n-aria-label="sidepanel.video.region" hidden></div>
+        <div class="image-bar" id="image-bar" hidden></div>
+        <div class="composer-status" id="composer-status" role="status" hidden></div>
+        <div class="composer-box" id="composer-box">
+          <div class="selection-ref" id="selection-ref" role="group" aria-label="Markierter Text von der Seite" data-i18n-aria-label="sidepanel.selection.region" hidden></div>
+          <div class="attach-list" id="attach-list" aria-label="Angehängte Bilder" data-i18n-aria-label="sidepanel.attachments.region" hidden></div>
+          <label for="input" class="sr-only" data-i18n="sidepanel.composer.label">Nachricht</label>
+          <textarea id="input" class="composer-input" rows="1" placeholder="Frag mich etwas …" data-i18n-placeholder="sidepanel.composer.placeholder" spellcheck="true" autocomplete="off"></textarea>
+          <div class="composer-row">
+            <button type="button" class="btn-icon btn-sm" id="btn-attach" data-icon="paperclip" data-icon-size="16" title="Bilder anhängen (auch per Einfügen oder Ziehen)" aria-label="Bilder anhängen" data-i18n-title="sidepanel.composer.attachHint" data-i18n-aria-label="sidepanel.composer.attach"></button>
+            <button type="button" class="btn-icon btn-sm" id="btn-image-mode" data-icon="image" data-icon-size="16" title="Bild generieren (oder „/bild …“ schreiben)" aria-label="Bildmodus" data-i18n-title="sidepanel.composer.imageModeHint" data-i18n-aria-label="sidepanel.composer.imageMode" aria-pressed="false"></button>
+            <button type="button" class="btn-icon btn-sm" id="btn-page" data-icon="page" data-icon-size="16" title="Seiteninhalt mitsenden" aria-label="Seiteninhalt mitsenden" data-i18n-title="sidepanel.composer.page" data-i18n-aria-label="sidepanel.composer.page" aria-pressed="false"></button>
+            <button type="button" class="btn-icon btn-sm" id="btn-balance" data-icon="wallet" data-icon-size="16" title="Kontostand bei deinen Anbietern" aria-label="Kontostand anzeigen" data-i18n-title="sidepanel.composer.balanceHint" data-i18n-aria-label="sidepanel.composer.balance" aria-haspopup="dialog" aria-expanded="false"></button>
+            <span class="spacer"></span>
+            <span class="composer-hint" id="composer-hint" aria-hidden="true"></span>
+            <button type="button" class="send-btn" id="btn-send" title="Senden" aria-label="Senden" data-i18n-title="sidepanel.composer.send" data-i18n-aria-label="sidepanel.composer.send" disabled></button>
+          </div>
+        </div>
+        <input type="file" id="file-input" accept="image/*" multiple hidden>
+      </footer>
+    </div>
+
+    <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+    <aside class="drawer" id="history" role="dialog" aria-modal="true" hidden></aside>
+    <div class="drop-overlay" id="drop-overlay" hidden>
+      <div class="drop-inner">
+        <span data-icon="image" data-icon-size="28" aria-hidden="true"></span>
+        <strong data-i18n="sidepanel.attachments.dropTitle">Bilder hier ablegen</strong>
+        <span data-i18n="sidepanel.attachments.dropHint">bis zu 6 Bilder pro Nachricht</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
